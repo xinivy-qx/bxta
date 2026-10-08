@@ -5,23 +5,12 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
     result = ""
-    result_class = ""
 
     if request.method == "POST":
-        age = int(request.form["age"])
+        age = request.form["age"]
+        result = "WALA KANG BITAW"
 
-        if age < 18:
-            result = "WALA KANG BITAW"
-            result_class = "underage"
-        else:
-            result = "PWEDENG-PWEDE KA"
-            result_class = "adult"
-
-    return render_template(
-        "index.html",
-        result=result,
-        result_class=result_class
-    )
+    return render_template("index.html", result=result)
 
 if __name__ == "__main__":
     app.run(debug=True)
